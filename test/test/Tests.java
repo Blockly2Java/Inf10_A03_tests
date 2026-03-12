@@ -58,4 +58,71 @@ public class Tests {
             }
         }
     }
+    public static void testSubtrahieren() {
+        setup();
+
+        for(int i = 0; i < 4; i++) {
+            for (double[] value : values) {
+                double z1 = i < 2 ? value[0] : -value[0];
+                double z2 = i > 1 ? value[1] : -value[1];
+
+                double expected = z1 - z2;
+                double actual = (double) saveCast(h.subtrahieren().invoke(z1, z2), double.class);
+                if (Double.compare(expected, actual) != 0) {
+                    fail(messageBuilder(z1, z2, expected, actual, "subtrahieren"));
+                }
+            }
+        }
+    }
+    public static void testMultiplizieren() {
+        setup();
+
+        for(int i = 0; i < 4; i++) {
+            for (double[] value : values) {
+                double z1 = i < 2 ? value[0] : -value[0];
+                double z2 = i > 1 ? value[1] : -value[1];
+
+                double expected = z1 * z2;
+                double actual = (double) saveCast(h.multiplizieren().invoke(z1, z2), double.class);
+                if (Double.compare(expected, actual) != 0) {
+                    fail(messageBuilder(z1, z2, expected, actual, "multiplizieren"));
+                }
+            }
+        }
+    }
+
+    public static void testDividieren() {
+        setup();
+
+        for(int i = 0; i < 4; i++) {
+            for (double[] value : values) {
+                double z1 = i < 2 ? value[0] : -value[0];
+                double z2 = i > 1 ? value[1] : -value[1];
+
+                double expected = z1 / z2;
+                double actual = (double) saveCast(h.dividieren().invoke(z1, z2), double.class);
+                if (Double.compare(expected, actual) != 0) {
+                    fail(messageBuilder(z1, z2, expected, actual, "dividieren"));
+                }
+            }
+        }
+    }
+
+
+    public static void testMittelwert() {
+        setup();
+
+        for(int i = 0; i < 4; i++) {
+            for (double[] value : values) {
+                double z1 = i < 2 ? value[0] : -value[0];
+                double z2 = i > 1 ? value[1] : -value[1];
+
+                double expected = (z1 + z2) / 2;
+                double actual = (double) saveCast(h.mittelwert().invoke(z1, z2), double.class);
+                if (Double.compare(expected, actual) != 0) {
+                    fail(messageBuilder(z1, z2, expected, actual, "mittelwert"));
+                }
+            }
+        }
+    }
 }

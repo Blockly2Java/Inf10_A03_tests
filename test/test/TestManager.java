@@ -56,43 +56,44 @@ public class TestManager {
             fail(e.getMessage());
         }
     }
-/*
-    @Test
-    void test() {
-        try {
-            Tests.test();
-        }
-        catch (AssertionError e) {
-            fail(e.getMessage());
-        }
-    }
-    @Test
-    void test() {
-        try {
-            Tests.test();
-        }
-        catch (AssertionError e) {
-            fail(e.getMessage());
-        }
-    }
-    @Test
-    void test() {
-        try {
-            Tests.test();
-        }
-        catch (AssertionError e) {
-            fail(e.getMessage());
-        }
-    }
-    @Test
-    void test() {
-        try {
-            Tests.test();
-        }
-        catch (AssertionError e) {
-            fail(e.getMessage());
-        }
-    }
-*/
-}    
 
+    @Test
+    void testSubtrahieren() {
+        try {
+            Tests.testSubtrahieren();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void testMultiplizieren() {
+        try {
+            Tests.testMultiplizieren();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void testDividieren() {
+        try {
+            Tests.testDividieren();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void testMittelwert() {
+        try {
+            Tests.testMittelwert();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+}
