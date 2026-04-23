@@ -96,10 +96,6 @@ public class MenschWrapper<T> extends ClassWrapper<T>
         return meinHund;
     }
 
-    public MethodWrapper<T, Integer> mathRandomInt() {
-        return mathRandomInt;
-    }
-
     public MethodWrapper<T, ?> gassiGehen() {
         return gassiGehen;
     }
