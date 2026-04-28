@@ -1,8 +1,9 @@
 name: Publish Tests Package
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
-  push:
 
 permissions:
   contents: read
@@ -31,6 +32,13 @@ jobs:
           server-id: github
           server-username: GH_PACKAGES_USERNAME
           server-password: GH_TOKEN
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Update version in pom.xml
+        run: mvn -B versions:set -DnewVersion=${{ steps.version.outputs.version }} -DgenerateBackupPoms=false
 
       - name: Publish to GitHub Packages
         run: mvn -B -DskipTests clean deploy
