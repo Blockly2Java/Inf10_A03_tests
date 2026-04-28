@@ -20,7 +20,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/ValentinHerrmann/Artemis-Testing-Patterns</url>
+      <url>https://maven.pkg.github.com/Blockly2Java/Taschenrechner</url>
     </repository>
   </distributionManagement>
   <properties>
