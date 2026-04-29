@@ -62,16 +62,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    <groupId>de.tum.in.ase</groupId>
-    <artifactId>artemis-java-test-sandbox</artifactId>
-    <version>1.15.0</version>
-    <scope>test</scope>
+      <groupId>de.tum.in.ase</groupId>
+      <artifactId>artemis-java-test-sandbox</artifactId>
+      <version>1.15.0</version>
     </dependency>
-  <dependency>
-    <groupId>de.tum.cit.aet</groupId>
-    <artifactId>levenshtein-name-deviation-pattern</artifactId>
-    <version>[1.0.0,)</version>
-  </dependency>
+    <dependency>
+      <groupId>de.tum.cit.aet</groupId>
+      <artifactId>levenshtein-name-deviation-pattern</artifactId>
+      <version>[1.0.0,)</version>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>${project.basedir}/assignment/src</sourceDirectory>
