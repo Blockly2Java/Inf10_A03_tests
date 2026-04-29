@@ -1,12 +1,12 @@
-package test;
+package b2j.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+import b2j.wrappers.TaschenrechnerWrapper;
 import static de.tum.cit.aet.levenshtein.Utils.saveCast;
-import wrappers.TaschenrechnerWrapper;
 
 public class Tests {
     private static String[] outLines;
