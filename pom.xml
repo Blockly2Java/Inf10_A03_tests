@@ -67,7 +67,7 @@
   </dependency>
   </dependencies>
   <build>
-    <sourceDirectory>${project.basedir}/../assignment/src</sourceDirectory>
+    <sourceDirectory>${project.basedir}/../solution/src</sourceDirectory>
     <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
     <testResources>
       <testResource>
