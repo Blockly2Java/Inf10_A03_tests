@@ -1,36 +1,57 @@
 package test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Arrays;
-
+import wrappers.HundWrapper;
 import wrappers.MainWrapper;
-
-import static org.junit.jupiter.api.Assertions.fail;
-
+import wrappers.MenschWrapper;
 public class Tests {
-    private static String[] outLines;
-    private static PrintStream originalOut;
-    private static ByteArrayOutputStream outContent;
-    private static MainWrapper<?> h;
+    static MainWrapper<?> main = new MainWrapper<>(); 
+    static HundWrapper<?> hund = new HundWrapper<>();
+    static MenschWrapper<?> mensch = new MenschWrapper<>();
 
-    static void setup() {
-        originalOut = System.out;
-        outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        h = new MainWrapper<>();
+    public static void testMenschGetX() {
+        double x = (double) Tests.mensch.getX().invoke();
+        assertThat(x).isNotNaN();
     }
 
-    public static void testMain() {
-        setup();
+    public static void testMenschGetY() {
+        double y = (double) Tests.mensch.getY().invoke();
+        assertThat(y).isNotNaN();
+    }
 
-        h.main().invoke();
+    public static void testGassiGehen() {
+        double initialMenschX = (double) Tests.mensch.getX().invoke();
+        double initialMenschY = (double) Tests.mensch.getY().invoke();
+        Tests.mensch.gassiGehen().invoke();
+        double newMenschX = (double) Tests.mensch.getX().invoke();
+        double newMenschY = (double) Tests.mensch.getY().invoke();
+        double newHundX = (double) Tests.hund.getX().invoke();
+        double newHundY = (double) Tests.hund.getY().invoke();
+        // Check Mensch moved
+        assertThat(Math.abs(newMenschX - initialMenschX) > 0 || Math.abs(newMenschY - initialMenschY) > 0).isTrue();
+        // Check Hund moved to Mensch
+        double dist = Math.sqrt(Math.pow(newMenschX - newHundX, 2) + Math.pow(newMenschY - newHundY, 2));
+        assertThat(dist).isLessThan(5);
+    }
 
-        outLines = Arrays.stream(outContent.toString().split(System.lineSeparator())).filter(x -> !x.equals("")).toArray(String[]::new);
-        if (outLines.length != 0) {
-            String printed = String.join(System.lineSeparator(), outLines);
-            fail("Die Methode main() gibt eine falsche Anzahl an Zeilen aus. Sie darf nichts ausgeben!" + System.lineSeparator() + printed);
-        }
+    public static void testHundRufen() {
+        double menschX = (double) Tests.mensch.getX().invoke();
+        double menschY = (double) Tests.mensch.getY().invoke();
+        Tests.mensch.hundRufen().invoke();
+        double newHundX = (double) Tests.hund.getX().invoke();
+        double newHundY = (double) Tests.hund.getY().invoke();
+        double dist = Math.sqrt(Math.pow(menschX - newHundX, 2) + Math.pow(menschY - newHundY, 2));
+        assertThat(dist).isLessThan(5);
+    }
+
+    public static void testBeiFuss() {
+        Object menschObj = Tests.mensch.getObj();
+        double menschX = (double) Tests.mensch.getX().invoke();
+        double menschY = (double) Tests.mensch.getY().invoke();
+        Tests.hund.beiFuss().invoke(menschObj);
+        double newHundX = (double) Tests.hund.getX().invoke();
+        double newHundY = (double) Tests.hund.getY().invoke();
+        double dist = Math.sqrt(Math.pow(menschX - newHundX, 2) + Math.pow(menschY - newHundY, 2));
+        assertThat(dist).isLessThan(5);
     }
 }

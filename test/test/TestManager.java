@@ -9,46 +9,96 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
-import de.tum.cit.aet.levenshtein.LevenshteinTest;
-import static de.tum.cit.aet.levenshtein.StructuralLevenshtein.DetailLevel.ONE_PER_CLASS;
-import static de.tum.cit.aet.levenshtein.StructuralLevenshtein.structuralTestFactory;
+import levenshtein.LevenshteinTest;
+import static levenshtein.StructuralLevenshtein.DetailLevel.ONE_PER_MEMBER_CATEGORY;
+import static levenshtein.StructuralLevenshtein.structuralTestFactory;
+import wrappers.HundWrapper;
 import wrappers.MainWrapper;
+import wrappers.MenschWrapper;
 
 
 
 @LevenshteinTest
 public class TestManager {
 
-    static MainWrapper<?> mainClz;
-
-    public static MainWrapper<?> mainClz() {
-        return mainClz;
-    }
 
     @BeforeAll
     static void beforeAll() {
-        mainClz = new MainWrapper<>();
+        testCompilationAndSetup();
     }
 
-    void testCompilationAndSetup() {
-        assertThat(mainClz).isNotNull();
-        assertThat(mainClz).isInstanceOf(MainWrapper.class);
-
+    static void testCompilationAndSetup() {
+        assertThat(Tests.main).isNotNull();
+        assertThat(Tests.hund).isNotNull();
+        assertThat(Tests.mensch).isNotNull();
+        assertThat(Tests.main).isInstanceOf(MainWrapper.class);
+        assertThat(Tests.hund).isInstanceOf(HundWrapper.class);
+        assertThat(Tests.mensch).isInstanceOf(MenschWrapper.class);
     }
     
     @TestFactory
     List<DynamicTest> strukturTests() {
-        testCompilationAndSetup();
         return structuralTestFactory(
-            ONE_PER_CLASS,
-            mainClz
+            ONE_PER_MEMBER_CATEGORY,
+            Tests.main, Tests.hund, Tests.mensch
         );
     }
 
     @Test
-    void testMain() {
+    void testMenschGetX() {
         try {
-            Tests.testMain();
+            Tests.testMenschGetX();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+
+
+    @Test
+    void testMenschGetY() {
+        try {
+            Tests.testMenschGetY();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+
+
+    @Test
+    void testGassiGehen() {
+        try {
+            fail("Dieser Teil kann noch nicht automatisch überprüft werden.");
+            Tests.testGassiGehen();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+
+
+    @Test
+    void testHundRufen() {
+        try {
+            fail("Dieser Teil kann noch nicht automatisch überprüft werden.");
+            Tests.testHundRufen();
+        }
+        catch (AssertionError e) {
+            fail(e.getMessage());
+        }
+    }
+
+
+
+    @Test
+    void testBeiFuss() {
+        try {
+            fail("Dieser Teil kann noch nicht automatisch überprüft werden.");
+            Tests.testBeiFuss();
         }
         catch (AssertionError e) {
             fail(e.getMessage());
